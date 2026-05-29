@@ -22,11 +22,11 @@
             --accent: #1d4ed8;
             --success: #16a34a;
             --danger: #dc2626;
-            --background: #f1f5f9; /* Fundo Claro */
-            --card-bg: #ffffff;     /* Cards Brancos */
-            --text-main: #0f172a;   /* Texto Escuro */
+            --background: #f1f5f9; 
+            --card-bg: #ffffff;     
+            --text-main: #0f172a;   
             --text-muted: #64748b;
-            --border: #cbd5e1;      /* Bordas Suaves */
+            --border: #cbd5e1;      
         }
 
         * { 
@@ -102,7 +102,6 @@
 
         .resumo-diesel { background: #f8fafc; color: #334155; padding: 15px; border-radius: 10px; margin-top: 10px; font-weight: 600; border: 1px solid var(--border); line-height: 1.6; }
         
-        /* Card de Destaque do Fechamento */
         .card-lucro { background: #ffffff; border: 2px solid var(--primary); }
         .card-lucro h2 { color: var(--primary); border-bottom-color: var(--border); }
         
@@ -116,8 +115,7 @@
         
         h2.titulo-hist { font-size: 16px; color: var(--text-main); margin-top: 30px; margin-bottom: 10px; text-transform: uppercase; }
         
-        .km-erro { border-color: var(--danger) !important; color: var(--danger) !important; background-color: #fef2f2 !important; animation: shake 0.3s; }
-        @keyframes shake { 0%, 100% {transform: translateX(0);} 25% {transform: translateX(-4px);} 75% {transform: translateX(4px);} }
+        .km-erro { border-color: var(--danger) !important; color: var(--danger) !important; background-color: #fef2f2 !important; }
     </style>
 </head>
 <body>
@@ -139,8 +137,8 @@
                 <div class="form-group"><label>Valor Ton (R$)</label><input type="number" id="vTon" step="0.01"></div>
                 <div class="form-group"><label>KM Inicial</label><input type="number" id="kmI"></div>
                 <div class="form-group"><label>KM Final</label><input type="number" id="kmF"></div>
-                <div class="form-group"><label>Frete Bruto</label><input type="text" id="fBruto" readonly></div>
-                <div class="form-group"><label>KM Total</label><input type="text" id="kmTotal" readonly></div>
+                <div class="form-group"><label>Frete Bruto</label><input type="text" id="fBruto" readonly value="R$ 0,00"></div>
+                <div class="form-group"><label>KM Total</label><input type="text" id="kmTotal" readonly value="0 KM"></div>
             </div>
         </div>
 
@@ -148,20 +146,42 @@
         <div class="card">
             <h2>⛽ 2. Abastecimentos & Médias</h2>
             <div id="container-postos">
-                <script>
-                    for(let i=1; i<=4; i++) {
-                        document.write(`
-                            <div class="linha-abastecimento">
-                                <input type="text" placeholder="Posto ${i}" class="p-nome">
-                                <input type="number" placeholder="KM Ini" class="p-kmi">
-                                <input type="number" placeholder="KM Fin" class="p-kmf">
-                                <input type="number" placeholder="Litros" class="p-l" step="0.01">
-                                <input type="number" placeholder="R$/L" class="p-v" step="0.001">
-                                <div class="media-individual p-media">Média: 0,00</div>
-                            </div>
-                        `);
-                    }
-                </script>
+                <!-- Posto 1 -->
+                <div class="linha-abastecimento">
+                    <input type="text" placeholder="Posto 1" class="p-nome">
+                    <input type="number" placeholder="KM Ini" class="p-kmi">
+                    <input type="number" placeholder="KM Fin" class="p-kmf">
+                    <input type="number" placeholder="Litros" class="p-l" step="0.01">
+                    <input type="number" placeholder="R$/L" class="p-v" step="0.001">
+                    <div class="media-individual p-media">Média: 0,00</div>
+                </div>
+                <!-- Posto 2 -->
+                <div class="linha-abastecimento">
+                    <input type="text" placeholder="Posto 2" class="p-nome">
+                    <input type="number" placeholder="KM Ini" class="p-kmi">
+                    <input type="number" placeholder="KM Fin" class="p-kmf">
+                    <input type="number" placeholder="Litros" class="p-l" step="0.01">
+                    <input type="number" placeholder="R$/L" class="p-v" step="0.001">
+                    <div class="media-individual p-media">Média: 0,00</div>
+                </div>
+                <!-- Posto 3 -->
+                <div class="linha-abastecimento">
+                    <input type="text" placeholder="Posto 3" class="p-nome">
+                    <input type="number" placeholder="KM Ini" class="p-kmi">
+                    <input type="number" placeholder="KM Fin" class="p-kmf">
+                    <input type="number" placeholder="Litros" class="p-l" step="0.01">
+                    <input type="number" placeholder="R$/L" class="p-v" step="0.001">
+                    <div class="media-individual p-media">Média: 0,00</div>
+                </div>
+                <!-- Posto 4 -->
+                <div class="linha-abastecimento">
+                    <input type="text" placeholder="Posto 4" class="p-nome">
+                    <input type="number" placeholder="KM Ini" class="p-kmi">
+                    <input type="number" placeholder="KM Fin" class="p-kmf">
+                    <input type="number" placeholder="Litros" class="p-l" step="0.01">
+                    <input type="number" placeholder="R$/L" class="p-v" step="0.001">
+                    <div class="media-individual p-media">Média: 0,00</div>
+                </div>
             </div>
             <div class="resumo-diesel" id="resDiesel">Total Diesel: R$ 0,00 | 0,00 L</div>
         </div>
@@ -174,7 +194,7 @@
                 <div class="form-group"><label>Manutenção</label><input type="number" id="man" step="0.01"></div>
                 <div class="form-group"><label>% Comissão</label><input type="number" id="pMoto"></div>
                 <div class="form-group"><label>Adiantamento (Vale)</label><input type="number" id="vale"></div>
-                <div class="form-group"><label>Saldo Motorista</label><input type="text" id="sMoto" readonly></div>
+                <div class="form-group"><label>Saldo Motorista</label><input type="text" id="sMoto" readonly value="R$ 0,00"></div>
                 <div class="form-group"><label>Outros Gastos</label><input type="number" id="outros" step="0.01"></div>
             </div>
         </div>
@@ -185,11 +205,11 @@
             <div class="grid-2">
                 <div class="form-group">
                     <label style="color: var(--danger);">Total de Despesas Acumuladas</label>
-                    <input type="text" id="totalDespesasSoma" readonly style="color: var(--danger); background: #fef2f2; border-color: var(--danger);">
+                    <input type="text" id="totalDespesasSoma" readonly style="color: var(--danger); background: #fef2f2; border-color: var(--danger);" value="R$ 0,00">
                 </div>
                 <div class="form-group">
                     <label style="color: var(--success);">Frete Líquido Real</label>
-                    <input type="text" id="fLiquido" readonly style="font-size: 18px; color: var(--success); background: #f0fdf4; border-color: var(--success);">
+                    <input type="text" id="fLiquido" readonly style="font-size: 18px; color: var(--success); background: #f0fdf4; border-color: var(--success);" value="R$ 0,00">
                 </div>
             </div>
         </div>
@@ -219,7 +239,9 @@
     const fmt = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
     function calcularTudo() {
-        const bruto = (parseFloat(document.getElementById('ton').value) || 0) * (parseFloat(document.getElementById('vTon').value) || 0);
+        const ton = parseFloat(document.getElementById('ton').value) || 0;
+        const vTon = parseFloat(document.getElementById('vTon').value) || 0;
+        const bruto = ton * vTon;
         document.getElementById('fBruto').value = fmt(bruto);
 
         const kmI = parseFloat(document.getElementById('kmI').value) || 0;
@@ -243,7 +265,8 @@
         let tL = 0, tD = 0;
         kmis.forEach((el, i) => {
             const ki = parseFloat(kmis[i].value) || 0, kf = parseFloat(kmfs[i].value) || 0, l = parseFloat(lits[i].value) || 0, v = parseFloat(vals[i].value) || 0;
-            tL += l; tD += (l * v);
+            tL += l; 
+            tD += (l * v);
             if (kf > ki && l > 0) {
                 const m = (kf - ki) / l;
                 divs[i].innerText = m.toFixed(2) + " KM/L";
@@ -266,7 +289,11 @@
         const vale = parseFloat(document.getElementById('vale').value) || 0;
         document.getElementById('sMoto').value = fmt(comiss - vale);
 
-        const desp = tD + comiss + (parseFloat(document.getElementById('ped').value) || 0) + (parseFloat(document.getElementById('man').value) || 0) + (parseFloat(document.getElementById('outros').value) || 0);
+        const ped = parseFloat(document.getElementById('ped').value) || 0;
+        const man = parseFloat(document.getElementById('man').value) || 0;
+        const outros = parseFloat(document.getElementById('outros').value) || 0;
+
+        const desp = tD + comiss + ped + man + outros;
         
         document.getElementById('totalDespesasSoma').value = fmt(desp);
         document.getElementById('fLiquido').value = fmt(bruto - desp);
