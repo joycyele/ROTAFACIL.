@@ -14,7 +14,7 @@
 
     <!-- ÍCONE DO APP (Caminhão Moderno) -->
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2555/2555013.png">
-    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2555/2555013.png">
+    <link @apple-touch-icon href="https://cdn-icons-png.flaticon.com/512/2555/2555013.png">
 
     <style>
         :root {
@@ -22,9 +22,9 @@
             --accent: #3b82f6;
             --success: #10b981;
             --danger: #f43f5e;
-            --background: #0f172a; /* Fundo Azul Escuro */
-            --card-bg: #1e293b;     /* Cards Escuros */
-            --text-main: #f8fafc;   /* Texto Claro */
+            --background: #0f172a; 
+            --card-bg: #1e293b;     
+            --text-main: #f8fafc;   
             --text-muted: #94a3b8;
             --border: #334155;
         }
@@ -102,7 +102,6 @@
 
         .resumo-diesel { background: #0f172a; color: #cbd5e1; padding: 15px; border-radius: 10px; margin-top: 10px; font-weight: 600; border: 1px solid var(--border); line-height: 1.6; }
         
-        /* Card de Destaque do Fechamento */
         .card-lucro { background: linear-gradient(to right, #1e293b, #0f172a); border: 2px solid var(--accent); }
         .card-lucro h2 { color: var(--accent); border-bottom-color: var(--border); }
         
@@ -115,7 +114,6 @@
         
         h2.titulo-hist { font-size: 16px; color: var(--text-main); margin-top: 30px; margin-bottom: 10px; text-transform: uppercase; }
         
-        /* Estilo para erro de KM */
         .km-erro { border-color: var(--danger) !important; color: var(--danger) !important; animation: shake 0.3s; }
         @keyframes shake { 0%, 100% {transform: translateX(0);} 25% {transform: translateX(-4px);} 75% {transform: translateX(4px);} }
     </style>
@@ -179,7 +177,7 @@
             </div>
         </div>
 
-        <!-- 4. Fechamento Atualizado com Despesas Totais -->
+        <!-- 4. Fechamento -->
         <div class="card card-lucro">
             <h2>💰 4. Demonstrativo Final</h2>
             <div class="grid-2">
@@ -222,13 +220,13 @@
         const bruto = (parseFloat(document.getElementById('ton').value) || 0) * (parseFloat(document.getElementById('vTon').value) || 0);
         document.getElementById('fBruto').value = fmt(bruto);
 
+        // Correção aqui: Se não digitar o KM, assume 0 para não travar o código
         const kmI = parseFloat(document.getElementById('kmI').value) || 0;
         const kmF = parseFloat(document.getElementById('kmF').value) || 0;
         const kmInputF = document.getElementById('kmF');
         
         let kmT = kmF - kmI;
         
-        // Validação básica se KM final for menor que o inicial
         if (kmF > 0 && kmF < kmI) {
             kmInputF.classList.add('km-erro');
             kmT = 0;
@@ -254,14 +252,12 @@
             }
         });
         
-        // Cálculo e exibição da média geral da viagem
         const mediaGeral = (kmT > 0 && tL > 0) ? (kmT / tL).toFixed(2) : "0,00";
         document.getElementById('resDiesel').innerHTML = `
             Total Diesel: ${fmt(tD)} | ${tL.toFixed(2)} L <br>
             <span style="color: var(--accent); font-size: 13px;">📊 Média Geral da Viagem: ${mediaGeral} KM/L</span>
         `;
 
-        // Salva a comissão digitada para não precisar redigitar na próxima abertura
         const comissaoPercent = parseFloat(document.getElementById('pMoto').value) || 0;
         localStorage.setItem('rotafacil_comissao', comissaoPercent);
 
@@ -269,10 +265,8 @@
         const vale = parseFloat(document.getElementById('vale').value) || 0;
         document.getElementById('sMoto').value = fmt(comiss - vale);
 
-        // Soma exata de todas as despesas da rota
         const desp = tD + comiss + (parseFloat(document.getElementById('ped').value) || 0) + (parseFloat(document.getElementById('man').value) || 0) + (parseFloat(document.getElementById('outros').value) || 0);
         
-        // Atualiza os campos na tela
         document.getElementById('totalDespesasSoma').value = fmt(desp);
         document.getElementById('fLiquido').value = fmt(bruto - desp);
     }
@@ -291,7 +285,6 @@
         localStorage.setItem('fretes_elton', JSON.stringify(hist));
         render();
         
-        // Reseta o formulário mas preserva a comissão salva
         document.getElementById('freteForm').reset();
         carregarComissaoSalva();
         calcularTudo();
